@@ -55,7 +55,7 @@ AS_HELP_STRING([--with-mem-align=BYTES], [Set the memory alignment (default: 8)]
 	mem_align=8)
 
 AC_ARG_WITH(ioloop,
-AS_HELP_STRING([--with-ioloop=IOLOOP], [Specify the I/O loop method to use (epoll, kqueue, poll; best for the fastest available; default is best)]),
+AS_HELP_STRING([--with-ioloop=IOLOOP], [Specify the I/O loop method to use (port, epoll, kqueue, poll; best for the fastest available; default is best)]),
 	ioloop=$withval,
 	ioloop=best)
 

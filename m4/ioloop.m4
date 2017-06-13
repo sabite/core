@@ -1,7 +1,33 @@
 dnl * I/O loop function
 AC_DEFUN([DOVECOT_IOLOOP], [
   have_ioloop=no
-  
+
+  if test "$ioloop" = "best" || test "$ioloop" = "port"; then
+    AC_CACHE_CHECK([whether we can use port],i_cv_port_works,[
+      AC_TRY_RUN([
+        #include <sys/port.h>
+
+        int main()
+        {
+	return port_create() < 1;
+        }
+      ], [
+        i_cv_port_works=yes
+      ], [
+        i_cv_port_works=no
+      ])
+    ])
+    if test $i_cv_port_works = yes; then
+      AC_DEFINE(IOLOOP_PORT,, [Import I/O loop with eventports])
+      have_ioloop=yes
+      ioloop=port
+    else
+      if test "$ioloop" = "port" ; then
+        AC_MSG_ERROR([port ioloop requested but port_create() is not available])
+      fi
+    fi
+  fi
+
   if test "$ioloop" = "best" || test "$ioloop" = "epoll"; then
     AC_CACHE_CHECK([whether we can use epoll],i_cv_epoll_works,[
       AC_TRY_RUN([

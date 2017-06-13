@@ -89,6 +89,7 @@ liblib_la_SOURCES = \
 	ioloop-select.c \
 	ioloop-epoll.c \
 	ioloop-kqueue.c \
+	ioloop-port.c \
 	json-parser.c \
 	json-tree.c \
 	lib.c \

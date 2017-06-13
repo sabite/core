@@ -609,6 +609,9 @@ static void print_help(void)
 static void print_build_options(void)
 {
 	printf("Build options:"
+#ifdef IOLOOP_PORT
+		" ioloop=port"
+#endif
 #ifdef IOLOOP_EPOLL
 		" ioloop=epoll"
 #endif
